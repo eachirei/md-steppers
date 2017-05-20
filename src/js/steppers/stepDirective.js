@@ -11,9 +11,9 @@
  */
 angular
     .module('md-steppers')
-    .directive('mdStep', MdStep);
+    .directive('mdStep', ["$http", MdStep]);
 
-function MdStep() {
+function MdStep($http) {
     return {
         require: '^?mdSteppers',
         terminal: true,
@@ -44,12 +44,22 @@ function MdStep() {
             active: '=?mdActive',
             disabled: '=?ngDisabled',
             select: '&?mdOnSelect',
-            deselect: '&?mdOnDeselect'
+            deselect: '&?mdOnDeselect',
+            stepTemplateUrl: '@stepTemplateUrl'
         }
     };
 
     function postLink(scope, element, attr, ctrl) {
         if (!ctrl) return;
+
+        $http.get(scope.stepTemplateUrl)
+            .then(function succCb(result){
+                setupDirectiveStuff(result.data);
+            }, function errCb(error){
+                console.error("Could not load template: " + error);
+            });
+
+        function setupDirectiveStuff(templateBody){
         var index = ctrl.getStepElementIndex(element),
             body = firstChild(element, 'md-step-body').remove(),
             label = firstChild(element, 'md-step-label').remove(),
@@ -58,16 +68,22 @@ function MdStep() {
                 parent: scope.$parent,
                 index: index,
                 element: element,
-                template: body.html(),
+                template: templateBody,
                 label: label.html()
             }, index);
 
         scope.select = scope.select || angular.noop;
         scope.deselect = scope.deselect || angular.noop;
 
-        scope.$watch('active', function (active) { if (active) ctrl.select(data.getIndex()); });
-        scope.$watch('complete', function () { ctrl.refreshIndex(); });
-        scope.$watch('disabled', function () { ctrl.refreshIndex(); });
+        scope.$watch('active', function (active) {
+            if (active) ctrl.select(data.getIndex());
+        });
+        scope.$watch('complete', function () {
+            ctrl.refreshIndex();
+        });
+        scope.$watch('disabled', function () {
+            ctrl.refreshIndex();
+        });
         scope.$watch(
             function () {
                 return ctrl.getStepElementIndex(element);
@@ -77,7 +93,9 @@ function MdStep() {
                 ctrl.updateStepOrder();
             }
         );
-        scope.$on('$destroy', function () { ctrl.removeStep(data); });
+        scope.$on('$destroy', function () {
+            ctrl.removeStep(data);
+        });}
     }
 
     function firstChild(element, tagName) {
