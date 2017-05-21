@@ -41,6 +41,15 @@ clone repository and run gulp for demo http://localhost.com:3333/demo/index.html
 
 ![md-steppers Screenshot](https://raw.githubusercontent.com/ipiz/md-steppers/master/md-steppers.png "md-steppers Screenshot")
 
+### Notes
+If you want to load only the controller for the current step.
+Otherwise all controllers are loaded.
+```html
+<md-steppers md-no-disconnect="true">
+...
+</md-steppers>
+```
+
 ### Todos
 
  - Unit Tests
