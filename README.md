@@ -1,3 +1,13 @@
+##WARNING
+This fork is intended to be used by taking the step template from an url.
+The rest of the functionality has not been tested for breaks.
+To use:
+```html
+<md-steppers>
+    <md-step step-template-url="{{step.url}}" ng-repeat="step in steps"></md-step>
+</md-steppers>
+```
+
 # md-steppers
 angular directive for material stepper
 https://www.google.com/design/spec/components/steppers.html#steppers-types-of-steppers
