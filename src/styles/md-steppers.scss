@@ -459,6 +459,7 @@ md-step {
 
     md-step-label-wrapper {
         flex-grow: 0;
+        margin-right:5px;
 
         span {
             margin-right: 8px;
@@ -478,6 +479,7 @@ md-step {
             content: attr(stepindex);
             flex-grow: 0;
             align-self: center;
+            vertical-align: top;
         }
 
         @media (max-width: 959px) {
