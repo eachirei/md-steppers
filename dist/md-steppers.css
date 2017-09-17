@@ -368,7 +368,8 @@ md-step {
   .md-step md-step-label-wrapper {
     -webkit-box-flex: 0;
         -ms-flex-positive: 0;
-            flex-grow: 0; }
+            flex-grow: 0;
+    margin-right: 5px; }
     .md-step md-step-label-wrapper span {
       margin-right: 8px; }
     .md-step md-step-label-wrapper::before {
@@ -388,7 +389,8 @@ md-step {
               flex-grow: 0;
       -ms-flex-item-align: center;
           -ms-grid-row-align: center;
-          align-self: center; }
+          align-self: center;
+      vertical-align: top; }
   .md-step.md-focused {
     box-shadow: none;
     outline: none; }
