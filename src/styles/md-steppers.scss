@@ -294,7 +294,8 @@ md-steppers {
 
 md-steppers-content-wrapper {
     display: block;
-    position: absolute;
+    //position: absolute;
+    height:inherit;
     top: $steppers-header-height;
     left: 0;
     right: 0;
@@ -304,7 +305,8 @@ md-steppers-content-wrapper {
 
 md-step-content {
     display: block;
-    position: absolute;
+    //position: absolute;
+    height:inherit;
     top: 0;
     left: 0;
     right: 0;
